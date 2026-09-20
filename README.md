@@ -41,6 +41,8 @@ where judgment is needed.
   column references can be traced through direct selects, joins/aliases,
   and expressions. Verified: finds `customer_email` correctly in all 3 real
   marts, correctly reports it absent in the control case.
+  <img width="1324" height="654" alt="image" src="https://github.com/user-attachments/assets/6489768d-292a-4481-835e-358123f4ac4e" />
+
 
 ### Pending
 
