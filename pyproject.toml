@@ -1,0 +1,25 @@
+[project]
+name = "cascade"
+version = "0.1.0"
+description = "Schema changed upstream. The fix PR is already open."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{name = "Vaishnavi"}]
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+]
+dependencies = [
+    "psycopg2-binary>=2.9",
+]
+
+[project.scripts]
+cascade = "cascade.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["cascade*"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
