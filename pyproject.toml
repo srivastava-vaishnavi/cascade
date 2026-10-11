@@ -12,6 +12,7 @@ classifiers = [
 ]
 dependencies = [
     "psycopg2-binary>=2.9",
+    "sqlglot>=27.0",
 ]
 
 [project.scripts]
