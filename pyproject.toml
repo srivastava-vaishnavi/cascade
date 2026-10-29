@@ -15,11 +15,17 @@ dependencies = [
     "sqlglot>=27.0",
 ]
 
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
 [project.scripts]
 cascade = "cascade.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["cascade*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [build-system]
 requires = ["setuptools>=77"]

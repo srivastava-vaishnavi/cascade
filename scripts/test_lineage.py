@@ -7,7 +7,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from cascade.lineage import MART_DIR, find_customer_email_in_sql
+from cascade.lineage import MART_DIR, find_column_in_sql
+
+TARGETS = {"customer_email"}
 
 
 def main() -> int:
@@ -18,23 +20,20 @@ def main() -> int:
         MART_DIR / "fct_daily_revenue.sql",
     ]
 
-    for mart_path in mart_files:
-        print(f"\n==== {mart_path.name} ====")
-        found, matches = find_customer_email_in_sql(mart_path, {"customer_email", "email"})
+    results = {path: find_column_in_sql(path, TARGETS) for path in mart_files}
+
+    for path, (found, matches) in results.items():
+        print(f"\n==== {path.name} ====")
         if found:
-            print("FOUND customer_email/email in this mart:")
+            print("FOUND customer_email in this mart:")
             for item in matches:
                 print(f"  - {item}")
         else:
-            print("ABSENT: customer_email/email not found in this mart")
+            print("ABSENT: customer_email not found in this mart")
 
     print("\nSummary:")
-    for mart_path in mart_files:
-        found, _ = find_customer_email_in_sql(mart_path, {"customer_email", "email"})
-        label = mart_path.stem
-        status = "FOUND" if found else "ABSENT"
-        print(f"- {label}: {status}")
-
+    for path, (found, _) in results.items():
+        print(f"- {path.stem}: {'FOUND' if found else 'ABSENT'}")
     return 0
 
 
